@@ -1,0 +1,32 @@
+package actividad4.punto1;
+
+import java.util.function.Consumer;
+
+public class PruebaExcepciones {
+
+    public static void ejecutar(Consumer<String> salida) {
+        // Primer bloque try [cite: 29]
+        salida.accept("Ingresando al primer try");
+        try {
+            double cociente = 10000 / 0; // Se lanza una excepción [cite: 31]
+            salida.accept("Después de la división");
+        } catch (ArithmeticException e) { // Se captura la excepción [cite: 33]
+            salida.accept("División por cero");
+        } finally {
+            salida.accept("Ingresando al primer finally"); // Se ejecuta siempre [cite: 37]
+        }
+
+        // Segundo bloque try [cite: 39]
+        salida.accept("Ingresando al segundo try");
+        try {
+            Object objeto = null;
+            objeto.toString(); // Se lanza una excepción [cite: 43]
+        } catch (ArithmeticException e) {
+            salida.accept("División por cero");
+        } catch (Exception e) { // Se captura la excepción [cite: 50]
+            salida.accept("Ocurrió una excepción");
+        } finally {
+            salida.accept("Ingresando al segundo finally"); // Se ejecuta siempre [cite: 53]
+        }
+    }
+}

@@ -1,0 +1,43 @@
+package actividad4.punto1;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class PruebaExcepcionesGUI extends JFrame {
+
+    private final JTextArea areaSalida;
+
+    public PruebaExcepcionesGUI() {
+        setTitle("Punto 1 - Prueba de Excepciones");
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        areaSalida = new JTextArea();
+        areaSalida.setEditable(false);
+        JScrollPane scroll = new JScrollPane(areaSalida);
+
+        JButton botonEjecutar = new JButton("Ejecutar");
+        JButton botonLimpiar = new JButton("Limpiar");
+
+        // Acción al presionar Ejecutar
+        botonEjecutar.addActionListener(e -> {
+            areaSalida.setText(""); // Limpia antes de mostrar nuevos resultados
+            PruebaExcepciones.ejecutar(mensaje -> areaSalida.append(mensaje + "\n"));
+        });
+
+        // Acción al presionar Limpiar
+        botonLimpiar.addActionListener(e -> areaSalida.setText(""));
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.add(botonEjecutar);
+        panelBotones.add(botonLimpiar);
+
+        add(scroll, BorderLayout.CENTER);
+        add(panelBotones, BorderLayout.SOUTH);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new PruebaExcepcionesGUI().setVisible(true));
+    }
+}
